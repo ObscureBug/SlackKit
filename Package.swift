@@ -16,14 +16,14 @@ let SKCore: Target   = .target(name: "SKCore",
                                path: "SKCore/Sources")
 
 let SKRTMAPI: Target = .target(name: "SKRTMAPI",
-                               path: "SKRTMAPI/Sources")
+                               path: "SKRTMAPI/Sources",
+                               exclude: ["Conformers/VaporEngineRTM.swift"])
 
 #if os(macOS)
 SKRTMAPI.dependencies = [
     "SKCore",
     "SKWebAPI",
-    "Starscream",
-    "WebSocket"
+    "Starscream"
 ]
 #elseif os(Linux)
 SKRTMAPI.dependencies = [
@@ -70,7 +70,6 @@ let package = Package(
 #if os(macOS)
 package.dependencies = [
     .package(url: "https://github.com/httpswift/swifter.git", .upToNextMinor(from: "1.4.6")),
-    .package(url: "https://github.com/vapor/websocket", .upToNextMinor(from: "1.1.2")),
     .package(url: "https://github.com/daltoniam/Starscream", .upToNextMinor(from: "3.1.0"))
 ]
 #elseif os(Linux)
